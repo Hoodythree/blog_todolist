@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+    <div class="ui container">
+        <div class="ui middle aligned grid">
+            <div class="five wide column">
+                <br>
+                <br>
+                <img class="ui medium rounded image" src="{{ user.profile.image.url }}">
+            </div>
+            <div class="eleven wide column">
+                <h4 class="ui horizontal divider header">
+                  <i class="user icon"></i>
+                  Profile
+                </h4>
+                <div class="ui segments">
+                  <div class="ui segment">
+                      <i class="user icon"></i>
+                        <span>{{ user.username }}</span>
+                  </div>
+                  <div class="ui segment">
+                        <i class="envelope icon"></i>
+                        <span>{{ user.email }}</span>
+                  </div>
+                  <div class="ui segment">
+                    <p>{{ user.profile.image.url }}</p>
+                  </div>
+                </div>
+                <form class="ui form" method="post">
+                    {% csrf_token %}
+                    <div class="ui segment">
+                        {% for field in u_form %}
+                        <div class="field">
+
+                            <label style="text-align: left;font-size: 1em" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+
+                        </div>
+
+                        {% endfor %}
+                        <button class="ui fluid button">Update</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}

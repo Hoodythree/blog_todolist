@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for post in post %}
+    <div class="ui raised very padded text container segment">
+      <h1 class="ui header">My Blog Home</h1>
+
+
+            <h2><a class="ui header" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+
+            <p>By {{ post.author }} on {{ post.date_posted|date:'F d, Y' }}</p>
+            <p>{{ post.content }}</p>
+            <hr>
+
+    </div>
+    {% endfor %}
+{% endblock content %}

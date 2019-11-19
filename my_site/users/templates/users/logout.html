@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+    <div class="ui middle aligned center aligned grid" >
+        <div class="column" style="max-width: 35em !important;">
+            <h2 class="ui image header">You have logged out</h2>
+            <div class="ui message">
+              <a href="{% url 'login' %}">Login again</a>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+    <div class="ui middle aligned center aligned grid" >
+        <div class="column" style="max-width: 35em !important;">
+            <h2 class="ui image header">
+                <div class="content">
+                    登    录
+                </div>
+            </h2>
+            <form class="ui form" method="POST">
+                {% csrf_token %}
+                <div class="ui segment">
+                    {% for field in form %}
+                    <div class="field">
+
+                        <label style="text-align: left;font-size: 1em" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+
+                    </div>
+
+                    {% endfor %}
+                    <button class="ui fluid button">Login</button>
+                </div>
+
+            </form>
+            <div class="ui message">
+              Need an account? <a href="{% url 'register' %}">Sign Up</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'todo/timer.html' %}
+
+{% block content %}
+
+    {% if all_items %}
+
+{#    <table class="ui celled table">#}
+{#          <thead>#}
+{#            <tr><th>Name</th>#}
+{#            <th>Age</th>#}
+{#            <th>Job</th>#}
+{#          </tr></thead>#}
+{#          <tbody>#}
+{#          {% for things in all_items %}#}
+{#            <tr>#}
+{#              <td data-label="Name">{{ things.item }}</td>#}
+{#              <td data-label="Age">{{ things.completed }}</td>#}
+{#              <td data-label="Job"><a href="{% url 'todo:delete' things.id %}">Delete</a></td>#}
+{#            </tr>#}
+{#          {% endfor %}#}
+{#          </tbody>#}
+{#    </table>#}
+        <div class="ui left aligned container">
+
+            {% for things in all_items %}
+            <div class="ui checkbox">
+              <input type="checkbox" tabindex="0" class="hidden" id="check_status" onchange="change_status()">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <label id="things_item">{{ things.item }}</label>
+            </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'todo:delete' things.id %}">Delete</a>
+                <br>
+            {% endfor %}
+        </div>
+
+
+    {% endif %}
+{% endblock %}

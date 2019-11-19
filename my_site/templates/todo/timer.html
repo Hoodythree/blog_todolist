@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	<title>
+		Timers
+	</title>
+	<style type="text/css">
+		body {
+			  margin: 0;
+			  font-family: Helvetica;
+			  {#background: url('https://www.tomatotimers.com/IMAGE%20FILE/Working%20Tomato%202.svg') top center no-repeat;#}
+			  background-size: cover;
+			  background-color: rgb(201, 91, 94);
+		}
+
+		#center_container {
+			margin: 200px;
+		}
+
+
+
+	</style>
+</head>
+<body>
+	<div class="ui large secondary menu">
+	  <img class="ui small image" src="https://www.tomatotimers.com/IMAGE%20FILE/Logo.svg">
+
+	  <div class="right menu">
+          <div class="item">
+            <a class="ui huge circular orange button" href="#">CUSTOM TIMER</a>
+          </div>
+          <div class="item">
+            <a class="ui huge circular orange button" href="#">WHAT IS PORODOMO TIMER</a>
+          </div>
+	   </div>
+	</div>
+	<div class="ui center aligned container">
+	  <button class="ui huge circular orange button" onclick="set_initial_time()">PORODOMO</button>
+	  <button class="ui huge circular orange button" onclick="short_break()">SHORT BREAK</button>
+	  <button class="ui huge circular orange button" onclick="long_break()">LONG BREAK</button>
+	  <button class="ui huge circular orange button">LOOP</button>
+
+	</div>
+
+	<div id="center_container" class="ui center aligned grid">
+		<div class="ui statistics">
+            <div class="statistic">
+                <div class="value" id="minute">
+                    0
+                </div>
+                <div class="label">
+                    Minutes
+                </div>
+            </div>
+            <div class="statistic">
+                <div class="value">
+                    :
+                </div>
+            </div>
+            <div class="statistic">
+                <div class="value" id="second">
+                    0
+                </div>
+                <div class="label">
+                    Seconds
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="ui left aligned container">
+
+            <form action="#" method="POST" class="ui form">
+                {% csrf_token %}
+                <div class="ui left icon input">
+                    <i class="calendar outline icon"></i>
+                  <input type="text" name="item" placeholder="Add item...">&nbsp;&nbsp;
+                  <button class="ui medium orange button" type="submit">Add</button>
+                </div>
+            </form>
+
+
+
+        </div>
+        <br>
+        <br>
+        <br>
+        {% block content %}
+
+        {% endblock %}
+	</div>
+	<p id="demo"></p>
+
+
+
+
+<script>
+
+	var initial_time = 0;
+
+	function interval_func() {
+
+		var minutes = Math.floor(initial_time/60);
+
+		var seconds = initial_time%60;
+
+		document.getElementById("minute").innerHTML = minutes;
+		document.getElementById("second").innerHTML =seconds;
+		console.log('initial_time = ' + initial_time);
+		if (initial_time < 0) {
+			// 停止执行
+				// clearInterval(x);
+				document.getElementById("demo").innerHTML = "TIME UP";
+				document.getElementById("minute").innerHTML ='0' ;
+				document.getElementById("second").innerHTML = '0';
+				return;
+			}
+
+		initial_time = initial_time - 1;
+	}
+	var x = setInterval(interval_func, 1000);
+
+
+
+	function set_initial_time(){
+
+		initial_time = 25 * 60;
+		x;
+	}
+
+	function short_break(){
+		initial_time = 5 * 60;
+		x;
+	}
+
+	function long_break(){
+		initial_time = 10 * 60;
+		x;
+	}
+
+	function pause(){
+
+		stopTimer();
+	}
+
+	function play(){
+		playTimer();
+	}
+
+	function stopTimer(){
+
+		clearInterval(x);
+
+		// resetTimer();
+	}
+
+	function playTimer(){
+
+		x;
+	}
+
+	function  change_status(){
+
+	    if(document.getElementById('check_status').checked){
+            document.getElementById('things_item').style.textDecoration = 'line-through'
+        }
+    }
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
